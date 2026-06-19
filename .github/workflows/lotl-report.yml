@@ -17,8 +17,6 @@ jobs:
         uses: actions/checkout@v4
       - name: Génération du rapport MD
         run: |
-          # Exemple : on crée un fichier avec la date du jour dans le bon dossier
-          # Remplacer par : npm run build, python script.py, etc.
           mkdir -p content/daily-posts
           echo "# Rapport du $(date +'%Y-%m-%d')" > content/daily-posts/rapport-$(date +'%Y-%m-%d').md
           echo "Contenu automatique..." >> content/daily-posts/rapport-$(date +'%Y-%m-%d').md
