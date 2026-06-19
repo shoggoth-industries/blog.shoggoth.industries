@@ -1,0 +1,30 @@
+name: Auto-push Rapport MD
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch: 
+
+jobs:
+  push-markdown:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout du dépôt
+        uses: actions/checkout@v4
+      - name: Génération du rapport MD
+        run: |
+          # Exemple : on crée un fichier avec la date du jour dans le bon dossier
+          # Remplacer par : npm run build, python script.py, etc.
+          mkdir -p content/daily-posts
+          echo "# Rapport du $(date +'%Y-%m-%d')" > content/daily-posts/rapport-$(date +'%Y-%m-%d').md
+          echo "Contenu automatique..." >> content/daily-posts/rapport-$(date +'%Y-%m-%d').md
+
+      - name: Commit & Push du rapport
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "docs: nouveau rapport quotidien automatique"
+          file_pattern: 'content/daily-posts/*.md'
